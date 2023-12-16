@@ -1,6 +1,6 @@
-package com.masterwork.CarAnalyser.repository;
+package com.masterwork.carrecognition.repository;
 
-import com.masterwork.CarAnalyser.model.User;
+import com.masterwork.carrecognition.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

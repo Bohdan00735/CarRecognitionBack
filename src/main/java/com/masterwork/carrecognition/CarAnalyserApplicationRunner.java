@@ -1,4 +1,4 @@
-package com.masterwork.CarAnalyser;
+package com.masterwork.carrecognition;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

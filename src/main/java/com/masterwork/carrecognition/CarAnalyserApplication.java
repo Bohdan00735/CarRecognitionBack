@@ -1,4 +1,4 @@
-package com.masterwork.CarAnalyser;
+package com.masterwork.carrecognition;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

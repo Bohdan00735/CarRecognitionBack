@@ -1,6 +1,6 @@
-package com.masterwork.CarAnalyser.repository;
+package com.masterwork.carrecognition.repository;
 
-import com.masterwork.CarAnalyser.model.LastSearch;
+import com.masterwork.carrecognition.model.LastSearch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

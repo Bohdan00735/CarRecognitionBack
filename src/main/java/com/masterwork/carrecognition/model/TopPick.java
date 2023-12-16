@@ -1,4 +1,4 @@
-package com.masterwork.CarAnalyser.model;
+package com.masterwork.carrecognition.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
