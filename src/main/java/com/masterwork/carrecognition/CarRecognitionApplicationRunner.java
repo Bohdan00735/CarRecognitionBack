@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Profile("!test")
 @Component
-public class CarAnalyserApplicationRunner implements ApplicationRunner {
+public class CarRecognitionApplicationRunner implements ApplicationRunner {
 
 
     @Override
