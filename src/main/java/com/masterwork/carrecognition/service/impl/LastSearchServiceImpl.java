@@ -5,11 +5,13 @@ import com.masterwork.carrecognition.repository.LastSearchRepository;
 import com.masterwork.carrecognition.service.LastSearchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
+@Service
 public class LastSearchServiceImpl implements LastSearchService {
 
     private final LastSearchRepository lastSearchRepository;

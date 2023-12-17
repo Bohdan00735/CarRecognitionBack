@@ -1,6 +1,5 @@
 package com.masterwork.carrecognition.repository;
 
-import com.masterwork.carrecognition.model.Favourite;
 import com.masterwork.carrecognition.model.LastSearch;
 import com.masterwork.carrecognition.model.User;
 import com.masterwork.carrecognition.repository.data.LastSearchRepositoryTestData;
@@ -37,10 +36,10 @@ public class LastSearchRepositoryTest extends LastSearchRepositoryTestData {
 
     @Test
     @Sql("/test_data.sql")
-    void shouldFindAllByUserId(){
+    void shouldFindAllByUserId() {
         User user = userRepository.findById(1L).orElseThrow();
         List<LastSearch> actual = lastSearchRepository.findAllByUserId(user.getId());
         List<LastSearch> expected = generateTestData(user);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

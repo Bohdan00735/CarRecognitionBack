@@ -36,10 +36,10 @@ public class FavouriteRepositoryTest extends FavouriteRepositoryTestData {
 
     @Test
     @Sql("/test_data.sql")
-    void shouldFindAllByUserId(){
+    void shouldFindAllByUserId() {
         User user = userRepository.findById(1L).orElseThrow();
         List<Favourite> actual = favouriteRepository.findAllByUserId(user.getId());
         List<Favourite> expected = generateTestData(user);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

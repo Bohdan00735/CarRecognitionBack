@@ -3,7 +3,6 @@ package com.masterwork.carrecognition.repository.data;
 import com.masterwork.carrecognition.model.Favourite;
 import com.masterwork.carrecognition.model.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

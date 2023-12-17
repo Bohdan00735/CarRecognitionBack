@@ -1,6 +1,5 @@
 package com.masterwork.carrecognition.repository;
 
-import com.masterwork.carrecognition.model.Favourite;
 import com.masterwork.carrecognition.model.LastSearch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

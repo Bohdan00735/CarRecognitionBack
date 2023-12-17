@@ -5,12 +5,14 @@ import com.masterwork.carrecognition.repository.FavouriteRepository;
 import com.masterwork.carrecognition.service.FavouriteService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
+@Service
 public class FavouriteServiceImpl implements FavouriteService {
 
     private final FavouriteRepository favouriteRepository;

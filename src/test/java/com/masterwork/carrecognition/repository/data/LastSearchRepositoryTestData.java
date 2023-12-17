@@ -1,6 +1,5 @@
 package com.masterwork.carrecognition.repository.data;
 
-import com.masterwork.carrecognition.model.Favourite;
 import com.masterwork.carrecognition.model.LastSearch;
 import com.masterwork.carrecognition.model.User;
 
