@@ -1,6 +1,8 @@
 package com.masterwork.carrecognition.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterwork.carrecognition.controller.data.FavouriteRestControllerTestData;
+import com.masterwork.carrecognition.dto.FavoriteExtendedDto;
 import com.masterwork.carrecognition.dto.FavouriteDto;
 import com.masterwork.carrecognition.mapper.FavouriteMapper;
 import com.masterwork.carrecognition.model.Favourite;
@@ -16,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,6 +48,19 @@ public class FavouriteRestControllerTest extends FavouriteRestControllerTestData
                 .andExpect(jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(jsonPath("$[1].header", Matchers.is(favouriteDtoList.get(1).getHeader())));
 
+    }
+
+    @Test
+    void shouldAddNewFavourite() throws Exception {
+        FavoriteExtendedDto favoriteExtendedDto = new FavoriteExtendedDto("Audi", "1.jpg", 1L);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(favoriteExtendedDto);
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/api/v1/favourites/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json))
+                .andExpect(status().isCreated());
+        verify(service, times(1)).addFavouriteToUser(favoriteExtendedDto);
     }
 
 }

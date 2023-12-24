@@ -2,14 +2,20 @@ package com.masterwork.carrecognition.controller;
 
 
 import com.masterwork.carrecognition.dto.LastSearchDto;
+import com.masterwork.carrecognition.dto.LastSearchExtendedDto;
 import com.masterwork.carrecognition.mapper.LastSearchMapper;
 import com.masterwork.carrecognition.service.LastSearchService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,10 +28,25 @@ public class LastSearchRestController {
     private final LastSearchService lastSearchService;
     private final LastSearchMapper lastSearchMapper;
 
+    @Operation(summary = "Get list of last searches")
+    @ApiResponse(responseCode = "200", description = "Received last searches from user",
+            content = {@Content(mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = LastSearchDto.class)))})
+    @Parameter(name = "id", description = "User id")
     @GetMapping("/{id}")
     public ResponseEntity<List<LastSearchDto>> getLastSearches(@PathVariable("id") Long userId) {
         return ResponseEntity.ok(lastSearchService.getAllByUserId(userId).stream().map(lastSearchMapper::convertToLastSearchDto).collect(Collectors.toList()));
     }
 
+    @Operation(summary = "Add last search")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Last search added", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid data",
+                    content = @Content)})
+    @PostMapping("/add")
+    public ResponseEntity<HttpStatus> addLastSearch(@RequestBody LastSearchExtendedDto lastSearchExtendedDto){
+        lastSearchService.addLastSearchToUser(lastSearchExtendedDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 }
