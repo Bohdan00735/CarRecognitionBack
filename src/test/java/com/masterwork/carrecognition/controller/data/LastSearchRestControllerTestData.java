@@ -4,6 +4,7 @@ import com.masterwork.carrecognition.dto.LastSearchDto;
 import com.masterwork.carrecognition.model.LastSearch;
 import com.masterwork.carrecognition.model.User;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public class LastSearchRestControllerTestData {
                         .header("Audi")
                         .imageUrl("1.jpg")
                         .user(new User(1L))
+                        .date(LocalDateTime.now())
                         .build(),
                 new LastSearch().builder()
                         .id(3L)
                         .header("Mers")
                         .imageUrl("2.jpg")
                         .user(new User(1L))
+                        .date(LocalDateTime.now())
                         .build());
     }
 

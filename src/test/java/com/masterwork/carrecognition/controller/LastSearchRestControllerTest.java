@@ -31,10 +31,10 @@ public class LastSearchRestControllerTest extends LastSearchRestControllerTestDa
     MockMvc mockMvc;
 
     @Test
-    void shouldGetAllFavouritesByUserId() throws Exception {
+    void shouldGetAllLastSearchesByUserId() throws Exception {
         List<LastSearch> lastSearches = generateLastSearches();
         List<LastSearchDto> lastSearchesDtoList = generateLastSearchesDto();
-        when(service.getAllByUserId(1L)).thenReturn(lastSearches);
+        when(service.getAllLastByUserId(1L,5)).thenReturn(lastSearches);
         when(mapper.convertToLastSearchDto(lastSearches.get(0))).thenReturn(lastSearchesDtoList.get(0));
         when(mapper.convertToLastSearchDto(lastSearches.get(1))).thenReturn(lastSearchesDtoList.get(1));
 

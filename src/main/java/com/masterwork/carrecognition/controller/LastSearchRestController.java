@@ -33,9 +33,10 @@ public class LastSearchRestController {
             content = {@Content(mediaType = "application/json",
                     array = @ArraySchema(schema = @Schema(implementation = LastSearchDto.class)))})
     @Parameter(name = "id", description = "User id")
+    @Parameter(name = "count", description = "Count of searches")
     @GetMapping("/{id}")
-    public ResponseEntity<List<LastSearchDto>> getLastSearches(@PathVariable("id") Long userId) {
-        return ResponseEntity.ok(lastSearchService.getAllByUserId(userId).stream().map(lastSearchMapper::convertToLastSearchDto).collect(Collectors.toList()));
+    public ResponseEntity<List<LastSearchDto>> getLastSearches(@PathVariable("id") Long userId,@RequestParam(defaultValue = "5") int count) {
+        return ResponseEntity.ok(lastSearchService.getAllLastByUserId(userId,count).stream().map(lastSearchMapper::convertToLastSearchDto).collect(Collectors.toList()));
     }
 
     @Operation(summary = "Add last search")

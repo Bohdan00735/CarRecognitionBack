@@ -6,6 +6,7 @@ import com.masterwork.carrecognition.repository.data.LastSearchRepositoryTestDat
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -41,5 +42,13 @@ public class LastSearchRepositoryTest extends LastSearchRepositoryTestData {
         List<LastSearch> actual = lastSearchRepository.findAllByUserId(user.getId());
         List<LastSearch> expected = generateTestData(user);
         assertEquals(expected, actual);
+    }
+
+    @Test
+    @Sql("/test_data_2.sql")
+    void shouldFindAllByUserIdAndDateN(){
+        User user = userRepository.findById(1L).orElseThrow();
+        List<LastSearch> actual = lastSearchRepository.findTopNByUserIdOrderByDateDesc(user.getId(), PageRequest.of(0,2));
+        System.out.println(actual);
     }
 }
