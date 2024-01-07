@@ -9,8 +9,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LastSearchDto {
+public class PredictionReviewDto {
 
-    private String header;
+    private String request;
+    private boolean prediction;
     private String imageUrl;
+    private String comment;
+    private long userId;
+
+
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Slf4j
@@ -50,6 +49,6 @@ public class LastSearchServiceImpl implements LastSearchService {
 
     public List<LastSearch> getAllLastByUserId(Long userId, int count) {
         log.info("Return all last searches by User id = " + userId);
-        return lastSearchRepository.findTopNByUserIdOrderByDateDesc(userId, PageRequest.of(0,count));
+        return lastSearchRepository.findTopNByUserIdOrderByDateDesc(userId, PageRequest.of(0, count));
     }
 }

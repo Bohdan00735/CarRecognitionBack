@@ -18,13 +18,13 @@ public class LastSearchRepositoryTestData {
     protected List<LastSearch> generateTestData(User user) {
         return Arrays.asList(
                 new LastSearch().builder()
-                        .id(4L)
+                        .id(13L)
                         .header("Mers")
                         .imageUrl("2.jpg")
                         .user(user)
                         .build(),
                 new LastSearch().builder()
-                        .id(5L)
+                        .id(14L)
                         .header("Porsh")
                         .imageUrl("4.jpg")
                         .user(user)

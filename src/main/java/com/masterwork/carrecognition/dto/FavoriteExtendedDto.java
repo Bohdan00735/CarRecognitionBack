@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class FavoriteExtendedDto {
 
 
-    public String header;
-    public String imageUrl;
-    public long userId;
+    private String header;
+    private String imageUrl;
+    private long userId;
 
 }

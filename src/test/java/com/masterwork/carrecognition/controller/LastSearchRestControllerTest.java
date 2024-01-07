@@ -1,7 +1,9 @@
 package com.masterwork.carrecognition.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.masterwork.carrecognition.controller.data.LastSearchRestControllerTestData;
 import com.masterwork.carrecognition.dto.LastSearchDto;
+import com.masterwork.carrecognition.dto.LastSearchExtendedDto;
 import com.masterwork.carrecognition.mapper.LastSearchMapper;
 import com.masterwork.carrecognition.model.LastSearch;
 import com.masterwork.carrecognition.service.LastSearchService;
@@ -16,7 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -34,7 +36,7 @@ public class LastSearchRestControllerTest extends LastSearchRestControllerTestDa
     void shouldGetAllLastSearchesByUserId() throws Exception {
         List<LastSearch> lastSearches = generateLastSearches();
         List<LastSearchDto> lastSearchesDtoList = generateLastSearchesDto();
-        when(service.getAllLastByUserId(1L,5)).thenReturn(lastSearches);
+        when(service.getAllLastByUserId(1L, 5)).thenReturn(lastSearches);
         when(mapper.convertToLastSearchDto(lastSearches.get(0))).thenReturn(lastSearchesDtoList.get(0));
         when(mapper.convertToLastSearchDto(lastSearches.get(1))).thenReturn(lastSearchesDtoList.get(1));
 
@@ -45,6 +47,19 @@ public class LastSearchRestControllerTest extends LastSearchRestControllerTestDa
                 .andExpect(jsonPath("$", Matchers.hasSize(2)))
                 .andExpect(jsonPath("$[1].header", Matchers.is(lastSearchesDtoList.get(1).getHeader())));
 
+    }
+
+    @Test
+    void shouldAddNewLastSearch() throws Exception {
+        LastSearchExtendedDto lastSearchExtendedDto = new LastSearchExtendedDto("Audi", "1.jpg", 1L);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(lastSearchExtendedDto);
+        this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/api/v1/lastSearches/add")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(json))
+                .andExpect(status().isCreated());
+        verify(service, times(1)).addLastSearchToUser(lastSearchExtendedDto);
     }
 
 

@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FavouriteDto {
 
-    public String header;
-    public String imageUrl;
+    private String header;
+    private String imageUrl;
 }

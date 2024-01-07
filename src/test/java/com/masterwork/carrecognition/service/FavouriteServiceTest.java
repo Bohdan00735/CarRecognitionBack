@@ -32,7 +32,7 @@ public class FavouriteServiceTest {
     @Test
     void shouldAddNewFavourite() {
 
-        FavoriteExtendedDto toSave = new FavoriteExtendedDto("Audi","1.jpg",1L);
+        FavoriteExtendedDto toSave = new FavoriteExtendedDto("Audi", "1.jpg", 1L);
         User founded = new User(toSave.getUserId());
         Favourite favourite = new Favourite().builder()
                 .header(toSave.getHeader())

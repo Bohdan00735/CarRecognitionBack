@@ -43,7 +43,7 @@ public class FavouriteRestController {
             @ApiResponse(responseCode = "400", description = "Invalid data",
                     content = @Content)})
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> addFavourite(@RequestBody FavoriteExtendedDto favoriteExtendedDto){
+    public ResponseEntity<HttpStatus> addFavourite(@RequestBody FavoriteExtendedDto favoriteExtendedDto) {
         favouriteService.addFavouriteToUser(favoriteExtendedDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

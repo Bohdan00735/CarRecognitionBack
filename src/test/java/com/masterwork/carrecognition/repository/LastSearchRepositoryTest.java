@@ -46,9 +46,9 @@ public class LastSearchRepositoryTest extends LastSearchRepositoryTestData {
 
     @Test
     @Sql("/test_data_2.sql")
-    void shouldFindAllByUserIdAndDateN(){
+    void shouldFindAllByUserIdAndDateN() {
         User user = userRepository.findById(1L).orElseThrow();
-        List<LastSearch> actual = lastSearchRepository.findTopNByUserIdOrderByDateDesc(user.getId(), PageRequest.of(0,2));
+        List<LastSearch> actual = lastSearchRepository.findTopNByUserIdOrderByDateDesc(user.getId(), PageRequest.of(0, 2));
         System.out.println(actual);
     }
 }

@@ -1,12 +1,12 @@
 package com.masterwork.carrecognition.service;
 
 import com.masterwork.carrecognition.config.TestConfig;
-import com.masterwork.carrecognition.dto.LastSearchExtendedDto;
-import com.masterwork.carrecognition.model.LastSearch;
+import com.masterwork.carrecognition.dto.PredictionReviewDto;
+import com.masterwork.carrecognition.model.PredictionReview;
 import com.masterwork.carrecognition.model.User;
-import com.masterwork.carrecognition.repository.LastSearchRepository;
+import com.masterwork.carrecognition.repository.PredictionReviewRepository;
 import com.masterwork.carrecognition.repository.UserRepository;
-import com.masterwork.carrecognition.service.impl.LastSearchServiceImpl;
+import com.masterwork.carrecognition.service.impl.PredictionReviewServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,39 +17,44 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = LastSearchServiceImpl.class)
+@SpringBootTest(classes = PredictionReviewServiceImpl.class)
 @ContextConfiguration(classes = TestConfig.class)
-public class LastSearchServiceTest {
+public class PredictionReviewServiceTest {
 
     @MockBean
-    LastSearchRepository lastSearchRepository;
+    PredictionReviewRepository predictionReviewRepository;
     @MockBean
     UserRepository userRepository;
     @Autowired
-    LastSearchService lastSearchService;
-
+    PredictionReviewService predictionReviewService;
 
     @Test
     void shouldAddNewLastSearch() {
 
-        LastSearchExtendedDto toSave = new LastSearchExtendedDto("Audi", "1.jpg", 1L);
+        PredictionReviewDto toSave = new PredictionReviewDto("Audi", true, "1.jog", "comm", 1L);
         User founded = new User(toSave.getUserId());
-        LastSearch lastSearch = new LastSearch().builder()
-                .header(toSave.getHeader())
+
+        PredictionReview predictionReview = new PredictionReview().builder()
+                .request("Audi")
+                .prediction(true)
                 .imageUrl(toSave.getImageUrl())
+                .comment("comm")
                 .user(founded)
                 .build();
-        LastSearch saved = new LastSearch().builder()
+
+        PredictionReview saved = new PredictionReview().builder()
                 .id(1L)
-                .header(toSave.getHeader())
+                .request("Audi")
+                .prediction(true)
                 .imageUrl(toSave.getImageUrl())
+                .comment("comm")
                 .user(founded)
                 .build();
 
         when(userRepository.findById(toSave.getUserId())).thenReturn(Optional.of(founded));
-        when(lastSearchRepository.save(lastSearch)).thenReturn(saved);
+        when(predictionReviewRepository.save(predictionReview)).thenReturn(saved);
 
-        lastSearchService.addLastSearchToUser(toSave);
-
+        predictionReviewService.addPredictionReview(toSave);
     }
+
 }
